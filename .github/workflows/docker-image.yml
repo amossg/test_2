@@ -26,8 +26,10 @@ jobs:
       run: cat ~/.docker/config.json
     - name: check gloud
       run: gcloud -v
+    - name: echo 
+      run: echo ${{ secrets.DOCKER_PUSH }} > key.json
     - name: auth activate-service-account
-      run: gcloud auth activate-service-account  doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com --key-file=${{ secrets.DOCKER_PUSH }}
+      run: gcloud auth activate-service-account  doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com --key-file=key.json
     - name: auth configure-docker
       run: gcloud auth configure-docker europe-central2-docker.pkg.dev
     - name: docker build
