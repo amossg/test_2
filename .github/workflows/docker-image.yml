@@ -19,3 +19,5 @@ jobs:
       
     - name: cat Docker conf
       run: cat ~/.docker/config.json
+    - name: check gloud
+      run: gcloud -v
