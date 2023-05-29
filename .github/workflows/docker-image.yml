@@ -27,7 +27,7 @@ jobs:
     - name: check gloud
       run: gcloud -v
     - name: echo 
-      run: echo ${{ secrets.DOCKER_PUSH }} > key.json
+      run: echo "${{ secrets.DOCKER_PUSH }}" > key.json
     - name: auth activate-service-account
       run: gcloud auth activate-service-account  doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com --key-file=key.json
     - name: auth configure-docker
