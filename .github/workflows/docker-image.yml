@@ -1,5 +1,10 @@
 name: Docker Image CI
 
+env:
+  SERVICE_ACCOUNT: doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com
+  DOCKERTAG: europe-central2-docker.pkg.dev/celtic-beacon-387519/amossg-docker/testdocker
+  
+
 on:
   push:
     branches: [ "main" ]
@@ -14,10 +19,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+#    - name: Build the Docker image
+#      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       
     - name: cat Docker conf
       run: cat ~/.docker/config.json
     - name: check gloud
       run: gcloud -v
+    - name: auth activate-service-account
+      run: gcloud auth activate-service-account  doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com --key-file=${{ secrets.DOCKER_PUSH }}
+    - name: auth configure-docker
+      run: gcloud auth configure-docker europe-central2-docker.pkg.dev
+    - name: docker build
+      run: docker build -t ${{ env.DOCKERTAG}}
+    - name: docker push
+      run: docker push ${{ env.DOCKERTAG}}
+      
