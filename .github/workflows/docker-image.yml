@@ -28,7 +28,9 @@ jobs:
     - name: check gloud
       run: gcloud -v
     - name: echo 
-      run: echo "$SUPER_SECRET"" > key.json
+      run: echo "$SUPER_SECRET" > key.json
+    - name: cat
+      run: cat key.json
     - name: auth activate-service-account
       run: gcloud auth activate-service-account  doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com --key-file=key.json
     - name: auth configure-docker
