@@ -1,7 +1,6 @@
 name: Docker Image CI
 
 env:
-  SERVICE_ACCOUNT: "doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com"
   DOCKERTAG: "europe-central2-docker.pkg.dev/celtic-beacon-387519/amossg-docker/testdocker"
   
 on:
@@ -18,13 +17,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-#    - name: Build the Docker image
-#      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-      
-  #  - name: cat Docker conf
- #     run: cat ~/.docker/config.json
-  #  - name: check gloud
-  #    run: gcloud -v
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
@@ -36,16 +28,6 @@ jobs:
         registry: europe-central2-docker.pkg.dev
         username: _json_key
         password: ${{ secrets.DOCKER_PUSH }}
-
- #   - uses: 'docker/login-action@v1'
-     # with:
- #       registry: 'europe-central2-docker.pkg.dev' # or REGION-docker.pkg.dev
-   #     username: 'oauth2accesstoken'
- #       password: '${{ steps.auth.outputs.access_token }}'
-#    - name: auth activate-service-account  
-   #   run: gcloud auth activate-service-account  doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com --key-file=key.json
-  #  - name: auth configure-docker
- #     run: gcloud auth configure-docker europe-central2-docker.pkg.dev
     - name: docker build
       run: docker build -t ${{ env.DOCKERTAG}} .
     - name: docker push
