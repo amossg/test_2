@@ -21,20 +21,22 @@ jobs:
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
       
-    - name: cat Docker conf
-      run: cat ~/.docker/config.json
-    - name: check gloud
-      run: gcloud -v
+  #  - name: cat Docker conf
+ #     run: cat ~/.docker/config.json
+  #  - name: check gloud
+  #    run: gcloud -v
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
         credentials_json: '${{ secrets.DOCKER_PUSH }}'
-    - uses: 'docker/login-action@v1'
-      with:
-        registry: 'europe-central2-docker.pkg.dev' # or REGION-docker.pkg.dev
-        username: 'oauth2accesstoken'
-        password: '${{ steps.auth.outputs.access_token }}'
+    - name: sadasdad
+      run: gcloud auth print-access-token | docker login -u oauth2accesstoken  --password-stdin https://europe-central2-docker.pkg.dev/
+ #   - uses: 'docker/login-action@v1'
+     # with:
+ #       registry: 'europe-central2-docker.pkg.dev' # or REGION-docker.pkg.dev
+   #     username: 'oauth2accesstoken'
+ #       password: '${{ steps.auth.outputs.access_token }}'
 #    - name: auth activate-service-account  
    #   run: gcloud auth activate-service-account  doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com --key-file=key.json
   #  - name: auth configure-docker
