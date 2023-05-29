@@ -29,7 +29,7 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
-        credentials_json: '${{ DOCKER_PUSH }}'
+        credentials_json: '${{ secrets.DOCKER_PUSH }}'
 #    - name: auth activate-service-account  
    #   run: gcloud auth activate-service-account  doker-pull-push@celtic-beacon-387519.iam.gserviceaccount.com --key-file=key.json
   #  - name: auth configure-docker
