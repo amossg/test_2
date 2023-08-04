@@ -1,1 +1,1 @@
- ${{ env.HELLO }}"
+ ${{ variables.HELLO }}"
