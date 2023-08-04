@@ -4,10 +4,7 @@ env:
   DOCKERTAG: "europe-central2-docker.pkg.dev/celtic-beacon-387519/amossg-docker/testdocker"
   
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch
 
 jobs:
 
